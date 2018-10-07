@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>IDC School of Design</title>
+    <link rel="icon" 
+      type="image/png" 
+      href="idc.png">
+
+     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/pace.min.js"></script>
+    <link rel="stylesheet" href="css/pace.css"></link>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,,600,700,800|Playfair+Display:400,700,900" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+    	body{
+    		font-family: 'Playfair Display', serif;
+    	}
+    	h4,h1,h3{
+    		font-family: 'Open Sans', sans-serif;
+    	}
+    	.branch.active{
+    		visibility:visible;
+    		display:block;
+    	}
+    	.container-fluid{
+    		height: auto;
+    		position: absolute; 
+    	}
+    	.main{
+    		height:100vh;
+    		overflow:hidden;
+    		background:white;
+    		z-index: 5;
+    		transition:transform 0.5s cubic-bezier(0.84, 0.14, 0.36, 1);
+    	}
+    	.intro{
+    		padding-top: 10vh;
+    		margin-bottom: 4vh;
+    		transition: background 0.5s ease-in-out;
+    	}
+    	.main.gone{
+    		transform:translateY(-200%);
+    	}
+    	.img-fluid, .img-thumbnail{
+    		max-width: 100%;
+    		height: auto;
+    		width:100%;
+    	}
+    	.img-fluid{
+    		-webkit-filter: blur(20px); /* Safari 6.0 - 9.0 */
+    		filter: blur(20px);
+    		transition: filter 0.5s ease-in-out;
+    	}
+    	.img-thumbnail{
+     		transition: margin .3s cubic-bezier(0.22, 0.61, 0.36, 1), filter 0.4s linear, transform 0.2s cubic-bezier(0.84, 0.14, 0.36, 1);
+    	}
+
+    	
+    	.side.title{
+    		transform:scale(0.5) translate(-10%,-300%) rotate(-90deg);
+    	}
+    	.title{
+    		transition:transform 0.5s cubic-bezier(0.84, 0.14, 0.36, 1), opacity 0.3s ease-in-out;
+    	}
+    	.title.gone{
+    		transform:translateY(-300%);
+    	}
+    	.title>h1,.title>h3{
+    		margin-top:0;
+    		margin-bottom: 0;
+    		font-weight: 800;
+    		font-family: Helvetica;
+    	}
+    	
+    	.main>.intro>.title>h3{
+    		font-size:2.1vh;
+    		font-weight: 700;
+
+    		
+    	}
+    	.main>.intro>.title>h3{
+    		margin-top:1vh !important;
+    	}
+    	.img-thumbnail{
+    		padding:0 !important;
+    		border:none;
+    		z-index: 1;
+    		background: rgba(0,0,0,0);
+    	}
+    	
+    	.branches>.gone{
+    		transform:translateY(-300%);
+    	}
+    	.branches>div{
+    		padding-top: 2vh;
+    		transition:background 1s cubic-bezier(0.1, 0.6, 0.36, 1), transform 1s cubic-bezier(0.81, 0.05, 0.36, 1);
+    	}
+    	
+    	.branches>div>h4{
+    		font-weight: 300;
+    		margin:0 0 0 0;
+    		text-align:center;
+    		z-index: 3;
+    		transition:all 0.3s cubic-bezier(0.1, 0.6, 0.36, 1) 0.1s;
+
+    	}
+    	.branches>div>h4:nth-child(2){
+    		font-weight: 600;
+     	}
+     	.branches>div>h4:nth-child(3){
+    		margin-bottom: 1vh;
+     	}
+     	.branches>div>div{
+    		position: absolute;
+		    width: 15vh;
+		    height: 0vh;
+		    top: 15vh;
+		    left: 0;
+		    transform: rotate(-90deg);
+    		transform-origin: 0% 0%;
+		    background: black;
+		    transition: height 0.5s cubic-bezier(0.69, 0.23, 0, 1.02) 0.1s;
+     	}
+     	.branches>div:nth-child(1)>div{
+     		background:#2196F3;
+     	}
+     	.branches>div:nth-child(2)>div{
+     		background:#FF9800;
+     		
+     	}
+     	.branches>div:nth-child(3)>div{
+     		background:#009688;
+     	}
+     	.branches>div:nth-child(4)>div{
+     		background:#8BC34A;
+     	}
+     	.branches>div:nth-child(5)>div{
+     		background:#F44336;
+     	}
+     	.branches>div:nth-child(6)>div{
+     		background:#9b27b0;
+     	}
+
+
+     	.sheet{
+     		height:100vh;
+     		position: absolute;
+     		background:red;
+     		z-index: 3;
+     		width: 100%;
+     		transition:transform 0.4s cubic-bezier(0.1, 0.6, 0.36, 1) 0.6s;
+     	}
+     	.sheet.gone{
+     		transform:translateY(-100%);
+     	}
+
+
+    	.branch{
+    		visibility:hidden;
+    		display: none;
+    		z-index: 2;
+
+    	}
+    	.branch>.intro>.title{
+    		position:fixed;
+    		z-index: 2;
+    		transform-origin: 0;
+    	}
+    	
+    	.panels>div{
+    		margin-bottom: 30vh;
+    		z-index: 3;
+    	}
+    	.panels>div>p{
+    		font-family: 'Open Sans', sans-serif;
+		    color: #80808045;
+		    position: absolute;
+		  
+		    right: 3vw;
+		    font-weight: 900;
+    	}
+    	.info{
+
+    	}
+
+
+    	.back{
+    		
+    		z-index: 6;
+    		position: fixed;
+    		visibility: hidden;
+    		height: 4vh;
+    		
+    	}
+    	.back>.line{
+    		height: 0.2vh;
+    		background:#FF9800;
+    		transform:scaleX(0.0) rotate(0deg) translate(0, 0);
+    		transform-origin: 50% 50%;
+    		transition: transform 0.5s cubic-bezier(0.78, 0.14, 0.36, 1);
+    	}
+    	.back>p{
+    		position: relative;
+    		right:0;
+    		font-size:1.8vh;
+    		color: #FF9800;
+    		opacity: 0;
+    		margin-bottom: 0;
+    		font-weight: 600;
+    		transform:translateX(50%);
+    		transition:transform 0.5s cubic-bezier(0.78, 0.14, 0.36, 1) 0.1s, opacity 0.4s ease-in-out 0.2s;
+    	}
+
+
+    	.legend{
+    		position: fixed;
+		    top: 60vh;
+    		height: 30vh;
+		    width: 100vw;
+		    z-index: 1;
+    	}
+    	.legend>div{
+    		height:100%;
+    	}
+    	.dash{
+    		width: 10%;
+		    height: 0.2vh;
+		    background: #9E9E9E;
+		    float: left;
+		    transform: translateY(500%);
+		    transform-origin: 0;
+		    transition:transform 0.3s cubic-bezier(0.78, 0.14, 0.36, 1);
+    	}
+    	.cat{
+    		text-align: right;
+		    width: 130%;
+		    display: inline-block;
+    	}
+    	.cat>p{
+    		width: 75%;
+    		float: left;
+    		color: #9E9E9E;
+    		margin: 0 0.8vh 0 0;
+    		font-weight: 500;
+    		transition: font-size 0.4s ease-in-out;
+    	}
+    	.cat.on>p{
+    		line-height: 2vh;
+    		font-size: 2vh !important;
+    		font-weight: 700 !important;
+    	}
+    	.cat.on>.dash{
+    		
+    		transform: translateY(800%) scaleX(2) !important;
+    	}
+
+
+    	.loader{
+    		z-index: 5;
+    		width:100vw;
+    		height: 100vh;
+    		background:white;
+    		position: absolute;
+    	}
+
+    	@media (min-width: 992px) 
+    {
+    	.intro{
+    		height:56vh !important;
+    	}
+    	.branches>div{
+    		height:40vh !important;
+    	}
+    	.branches>div>h4{
+    		font-size: 1.8vh !important;
+    	}
+    	.branches>div>img:hover{
+    		margin-top: -4vh !important;
+    		-webkit-filter: blur(0px) grayscale(0) !important; /* Safari 6.0 - 9.0 */
+    		filter: blur(0px) grayscale(0) !important;
+
+    	}
+    	.title>h1{
+    		font-size: 10vh !important;
+    	}
+    	.panels>div>p{
+    		top: -12vh !important;
+    		font-size: 7vh !important;
+    	}
+    	.back{
+    		top:10vh !important;	
+    	}
+    	.title>h3{
+    		font-size: 6vh !important;
+    		padding-left: 0.4vh !important;
+    		margin-top:0vh !important;
+    	}
+    	.legend{
+		    left: 0 !important;
+    	}
+    	.img-thumbnail{
+    		-webkit-filter: blur(2px) grayscale(1); /* Safari 6.0 - 9.0 */
+    		filter: blur(2px) grayscale(1);
+    	}
+
+
+
+    	
+    }
+
+
+
+
+
+    	@media (min-width: 300px) 
+    {  
+    	.intro{
+    		height:30vh;
+    	}
+    	.branches>div{
+    		height:35vh; 
+    	}
+    	.branches>div>h4{
+    		font-size: 1.5vh
+    	}
+    	.branches>div>img:hover{
+    		margin-top: -1vh;
+    		-webkit-filter: blur(0px) grayscale(0); /* Safari 6.0 - 9.0 */
+    		filter: blur(0px) grayscale(0);
+
+    	}
+    	.title>h1{
+    		font-size: 5.5vh;
+    		line-height: 6vh;
+    	}
+    	.panels>div>p{
+    		top: -6vh;
+		    font-size: 4vh;
+    	}
+    	.back{
+    		top:3vh;	
+    	}
+    	.title>h3{
+    		font-size: 5vh;
+    		padding-left: 00vh;
+    		margin-top:-1vh;
+    	}
+    	.legend{
+		    left: -100vw;
+    	}
+    	
+
+
+    }
+
+	</style>
+  </head>
+  <body>
+	<div class="container-fluid main">
+		<div class="row intro">
+			<div class="col-xs-offset-2 col-xs-8 col-md-offset-1 col-md-8 title">
+				<h1>IDC</h1><h3>School of Design</h3>
+			</div>
+		</div>
+		<div class="row branches">
+			<div class="col-xs-4 col-md-2 rounded">
+				<div></div>
+				<h4>INDUSTRIAL</h4><h4>DESIGN</h4>
+				<img src="./thumb/id.gif" class="img-thumbnail" alt="Adobe">
+				
+			</div>
+			<div class="col-xs-4 col-md-2 rounded">
+				<div></div>
+				<h4>INTERACTION</h4><h4>DESIGN</h4>
+				<img src="./thumb/ixd.gif" class="img-thumbnail" alt="Adobe">
+				
+			</div>
+			<div class="col-xs-4 col-md-2 rounded">
+				<div></div>
+				<h4>COMMUNICATION</h4><h4>DESIGN</h4>
+				<img src="./thumb/cd.gif" class="img-thumbnail" alt="Adobe">
+				
+			</div>
+			<div class="col-xs-4 col-md-2 rounded">
+				<div></div>
+				<h4>ANIMATION</h4><h4>DESIGN</h4>
+				<img src="./thumb/an.gif" class="img-thumbnail" alt="Adobe">
+				
+			</div>
+			<div class="col-xs-4 col-md-2 rounded">
+				<div></div>
+				<h4>MOBILITY & VEHICLE</h4><h4>DESIGN</h4>
+				<img src="./thumb/mvd.gif" class="img-thumbnail" alt="Adobe">
+				
+			</div>
+			<div class="col-xs-4 col-md-2 rounded">
+				<div></div>
+				<h4>BACHELORS IN</h4><h4>DESIGN</h4>
+				<img src="./thumb/id.gif" class="img-thumbnail" alt="Adobe">
+				
+			</div>
+			
+		</div>
+	</div>  
+	<div class="container-fluid sheet"></div>
+	<div class="container-fluid branch one">
+		<div class="row intro">
+			<div class="col-xs-offset-1 col-xs-11 col-md-offset-2 col-md-8 title">
+				<h1>Industrial</h1><h3>Design</h3>
+			</div>
+			<div class="col-xs-offset-1 col-xs-11 col-md-offset-2 col-md-8 side title">
+				<h1>Industrial</h1><h3>Design</h3>
+			</div>
+		</div>
+		<div class="row panels">
+			<div class="col-xs-offset-1 col-xs-11 col-md-offset-2 col-md-8 ">
+				<p>Abode</p>
+				<img src="./ID/Abode.jpg" class="img-fluid" alt="Abode">
+			</div>
+			<div class="col-xs-offset-1 col-xs-11 col-md-offset-2 col-md-8 ">
+				<p>Gizmos</p>
+				<img src="./ID/Gizmos.jpg" class="img-fluid" alt="Gizmos">
+			</div>
+			<div class="col-xs-offset-1 col-xs-11 col-md-offset-2 col-md-8 ">
+				<p>Naturals</p>
+				<img src="./ID/Naturals.jpg" class="img-fluid" alt="Naturals">
+			</div>
+			<div class="col-xs-offset-1 col-xs-11 col-md-offset-2 col-md-8 ">
+				<p>Tiny Tots</p>
+				<img src="./ID/Tiny_Tots.jpg" class="img-fluid" alt="Tiny Tots">
+			</div>
+			<div class="col-xs-offset-1 col-xs-11 col-md-offset-2 col-md-8 ">
+				<p>Veterans</p>
+				<img src="./ID/Veterans.jpg" class="img-fluid" alt="Veterans">
+			</div>
+			<div class="col-xs-offset-1 col-xs-11 Xcol-md-offset-2 col-md-8 ">
+				<p>Visage</p>
+				<img src="./ID/Visage.jpg" class="img-fluid" alt="Visage">
+			</div>
+
+		</div>
+		<div class="row legend">
+			<div class="col-md-2">
+				<div class="cat"><p>Abode</p><div class="dash"></div></div>
+				<div class="cat"><p>Gizmos</p><div class="dash"></div></div>
+				<div class="cat"><p>Naturals</p><div class="dash"></div></div>
+				<div class="cat"><p>Tiny Tots</p><div class="dash"></div></div>
+				<div class="cat"><p>Veterans</p><div class="dash"></div></div>
+				<div class="cat"><p>Visage</p><div class="dash"></div></div>
+			</div>
+		</div>
+	</div> 
+	<div class="container-fluid branch two">
+		<div class="row intro">
+			<div class="col-xs-offset-1 col-xs-11 col-md-offset-2 col-md-8 title">
+				<h1>Interaction</h1><h3>Design</h3>
+			</div>
+			<div class="col-xs-offset-1 col-xs-11 col-md-offset-2 col-md-8 side title">
+				<h1>Interaction</h1><h3>Design</h3>
+			</div>
+		</div>
+		<div class="row panels">
+			<div class="col-xs-offset-1 col-xs-11 col-md-offset-2 col-md-8 ">
+				<p>AR/VR</p>
+				<img src="./IXD/ARVR.jpg" class="img-fluid" alt="Adobe">
+			</div>
+			<div class="col-xs-offset-1 col-xs-11 col-md-offset-2 col-md-8 ">
+				<p>Data Vizualizatio</p>
+				<img src="./IXD/data viz.jpg" class="img-fluid" alt="Adobe">
+			</div>
+			<div class="col-xs-offset-1 col-xs-11 col-md-offset-2 col-md-8 ">
+				<p>Design Fiction</p>
+				<img src="./IXD/design fiction.jpg" class="img-fluid" alt="Adobe">
+			</div>
+			<div class="col-xs-offset-1 col-xs-11 col-md-offset-2 col-md-8 ">
+				<p>Game Design</p>
+				<img src="./IXD/game design.jpg" class="img-fluid" alt="Adobe">
+			</div>
+			<div class="col-xs-offset-1 col-xs-11 col-md-offset-2 col-md-8 ">
+				<p>Physical Computing</p>
+				<img src="./IXD/PhysicalComputing.jpg" class="img-fluid" alt="Adobe">
+			</div>
+			<div class="col-xs-offset-1 col-xs-11 col-md-offset-2 col-md-8 ">
+				<p>User Research & Evaluation</p>
+				<img src="./IXD/user res.png" class="img-fluid" alt="Adobe">
+			</div>
+
+		</div>
+		<div class="row legend">
+			<div class="col-md-2">
+				<div class="cat"><p>AR/VR</p><div class="dash"></div></div>
+				<div class="cat"><p>Data Visualization</p><div class="dash"></div></div>
+				<div class="cat"><p>Design Fiction</p><div class="dash"></div></div>
+				<div class="cat"><p>Game Design</p><div class="dash"></div></div>
+				<div class="cat"><p>Physical Computing</p><div class="dash"></div></div>
+				<div class="cat"><p>User Research & Evaluation</p><div class="dash"></div></div>
+			</div>
+		</div>
+	</div> 
+	<div class="container-fluid branch three">
+		<div class="row intro">
+			<div class="col-xs-offset-1 col-xs-11 col-md-offset-2 col-md-8 title">
+				<h1>Communication</h1><h3>Design</h3>
+			</div>
+			<div class="col-xs-offset-1 col-xs-11 col-md-offset-2 col-md-8 side title">
+				<h1>Communication</h1><h3>Design</h3>
+			</div>
+		</div>
+		<div class="row panels">
+			<div class="col-xs-offset-1 col-xs-11 col-md-offset-2 col-md-8 ">
+				<p>Interactive Experiences</p>
+				<img src="./CD/UIUX.jpg" class="img-fluid" alt="Adobe">
+			</div>
+			<div class="col-xs-offset-1 col-xs-11 col-md-offset-2 col-md-8 ">
+				<p>Packaging & Design</p>
+				<img src="./CD/Packaging.jpg" class="img-fluid" alt="Adobe">
+			</div>
+			<div class="col-xs-offset-1 col-xs-11 col-md-offset-2 col-md-8 ">
+				<p>Illustrations</p>
+				<img src="./CD/Illustrations.jpg" class="img-fluid" alt="Adobe">
+			</div>
+			<div class="col-xs-offset-1 col-xs-11 col-md-offset-2 col-md-8 ">
+				<p>Photography</p>
+				<img src="./CD/photography.jpg" class="img-fluid" alt="Adobe">
+			</div>
+			<div class="col-xs-offset-1 col-xs-11 col-md-offset-2 col-md-8 ">
+				<p>Typography</p>
+				<img src="./CD/Typography.jpg" class="img-fluid" alt="Adobe">
+			</div>
+
+		</div>
+		<div class="row legend">
+			<div class="col-md-2">
+				<div class="cat"><p>Interactive Experiences</p><div class="dash"></div></div>
+				<div class="cat"><p>Packaging & Design</p><div class="dash"></div></div>
+				<div class="cat"><p>Illustrations</p><div class="dash"></div></div>
+				<div class="cat"><p>Photography</p><div class="dash"></div></div>
+				<div class="cat"><p>Typography</p><div class="dash"></div></div>
+			</div>
+		</div>
+	</div> 
+	<div class="container-fluid branch four">
+		<div class="row intro">
+			<div class="col-xs-offset-1 col-xs-11 col-md-offset-2 col-md-8 title">
+				<h1>Animation</h1><h3>Design</h3>
+			</div>
+			<div class="col-xs-offset-1 col-xs-11 col-md-offset-2 col-md-8 side title">
+				<h1>Animation</h1><h3>Design</h3>
+			</div>
+		</div>
+		<div class="row panels">
+			<div class="col-xs-offset-1 col-xs-11 col-md-offset-2 col-md-8 ">
+				<p>Character Design</p>
+				<img src="./AN/Character design.jpg" class="img-fluid" alt="Adobe">
+			</div>
+			<div class="col-xs-offset-1 col-xs-11 col-md-offset-2 col-md-8 ">
+				<p>Concept Art</p>
+				<img src="./AN/Concept_Art.jpg" class="img-fluid" alt="Adobe">
+			</div>
+			<div class="col-xs-offset-1 col-xs-11 col-md-offset-2 col-md-8 ">
+				<p>Illustration</p>
+				<img src="./AN/Illustrations.jpg" class="img-fluid" alt="Adobe">
+			</div>
+			<div class="col-xs-offset-1 col-xs-11 col-md-offset-2 col-md-8 ">
+				<p>Production Process</p>
+				<img src="./AN/Production process.jpg" class="img-fluid" alt="Adobe">
+			</div>
+			<div class="col-xs-offset-1 col-xs-11 col-md-offset-2 col-md-8 ">
+				<p>Sequential Artworks</p>
+				<img src="./AN/Sequential artworks.jpg" class="img-fluid" alt="Adobe">
+			</div>
+			<div class="col-xs-offset-1 col-xs-11 col-md-offset-2 col-md-8 ">
+				<p>Animations</p>
+				<iframe width="100%" height="600" src="https://www.youtube.com/embed/m5lcTzUFGXU" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+			</div>
+
+		</div>
+		<div class="row legend">
+			<div class="col-md-2">
+				<div class="cat"><p>Character Design</p><div class="dash"></div></div>
+				<div class="cat"><p>Concept Art</p><div class="dash"></div></div>
+				<div class="cat"><p>Illustrations</p><div class="dash"></div></div>
+				<div class="cat"><p>Production Process</p><div class="dash"></div></div>
+				<div class="cat"><p>Sequential Artworks</p><div class="dash"></div></div>
+				<div class="cat"><p>Animations</p><div class="dash"></div></div>
+			</div>
+		</div>
+	</div> 
+	<div class="container-fluid branch five">
+		<div class="row intro">
+			<div class="col-xs-offset-1 col-xs-11 col-md-offset-2 col-md-8 title">
+				<h1>Mobility & Vehicle</h1><h3>Design</h3>
+			</div>
+			<div class="col-xs-offset-1 col-xs-11 col-md-offset-2 col-md-8 side title">
+				<h1>Mobility & Vehicle</h1><h3>Design</h3>
+			</div>
+		</div>
+		<div class="row panels">
+			<div class="col-xs-offset-1 col-xs-11 col-md-offset-2 col-md-8 ">
+				<p>Clay Modelling</p>
+				<img src="./MVD/Clay modelling.jpg" class="img-fluid" alt="Adobe">
+			</div>
+			<div class="col-xs-offset-1 col-xs-11 col-md-offset-2 col-md-8 ">
+				<p>Computer Aided Designing</p>
+				<img src="./MVD/CAD.jpg" class="img-fluid" alt="Adobe">
+			</div>
+			<div class="col-xs-offset-1 col-xs-11 col-md-offset-2 col-md-8 ">
+				<p>Function Oriented Design</p>
+				<img src="./MVD/Function oriented design.jpg" class="img-fluid" alt="Adobe">
+			</div>
+			<div class="col-xs-offset-1 col-xs-11 col-md-offset-2 col-md-8 ">
+				<p>System Design</p>
+				<img src="./MVD/System Design.jpg" class="img-fluid" alt="Adobe">
+			</div>
+			<div class="col-xs-offset-1 col-xs-11 col-md-offset-2 col-md-8 ">
+				<p>Vehicle Styling</p>
+				<img src="./MVD/Vehicle Styling.jpg" class="img-fluid" alt="Adobe">
+			</div>
+
+		</div>
+		<div class="row legend">
+			<div class="col-md-2">
+				<div class="cat"><p>Clay Modelling</p><div class="dash"></div></div>
+				<div class="cat"><p>Computer Aided Designing</p><div class="dash"></div></div>
+				<div class="cat"><p>Function Oriented Design</p><div class="dash"></div></div>
+				<div class="cat"><p>System Design</p><div class="dash"></div></div>
+				<div class="cat"><p>Vehicle Styling</p><div class="dash"></div></div>
+			</div>
+		</div>
+	</div> 
+	<div class="container-fluid branch six">
+		<div class="row intro">
+			<div class="col-xs-offset-1 col-xs-11 col-md-offset-2 col-md-8 title">
+				<h1>Bachelors In</h1><h3>Design</h3>
+			</div>
+			<div class="col-xs-offset-1 col-xs-11 col-md-offset-2 col-md-8 side title">
+				<h1>Bachelors In</h1><h3>Design</h3>
+			</div>
+		</div>
+		<div class="row panels">
+			<div class="col-xs-offset-1 col-xs-11 col-md-offset-2 col-md-8 ">
+				<img src="./ID/Abode.jpg" class="img-fluid" alt="Abode">
+				<div class="info"></div>
+			</div>
+			<div class="col-xs-offset-1 col-xs-11 col-md-offset-2 col-md-8 ">
+				<img src="./ID/Gizmos.jpg" class="img-fluid" alt="Gizmos">
+			</div>
+			<div class="col-xs-offset-1 col-xs-11 col-md-offset-2 col-md-8 ">
+				<img src="./ID/Naturals.jpg" class="img-fluid" alt="Naturals">
+			</div>
+			<div class="col-xs-offset-1 col-xs-11 col-md-offset-2 col-md-8 ">
+				<img src="./ID/Tiny_Tots.jpg" class="img-fluid" alt="Tiny Tots">
+			</div>
+			<div class="col-xs-offset-1 col-xs-11 col-md-offset-2 col-md-8 ">
+				<img src="./ID/Veterans.jpg" class="img-fluid" alt="Veterans">
+			</div>
+			<div class="col-xs-offset-1 col-xs-11 col-md-offset-2 col-md-8 ">
+				<img src="./ID/Visage.jpg" class="img-fluid" alt="Visage">
+			</div>
+
+		</div>
+		<div class="row legend">
+			<div class="col-md-2">
+				<div class="cat"><p>Abode</p><div class="dash"></div></div>
+				<div class="cat"><p>Gizmos</p><div class="dash"></div></div>
+				<div class="cat"><p>Naturals</p><div class="dash"></div></div>
+				<div class="cat"><p>Tiny Tots</p><div class="dash"></div></div>
+				<div class="cat"><p>Veterans</p><div class="dash"></div></div>
+				<div class="cat"><p>Visage</p><div class="dash"></div></div>
+			</div>
+		</div>
+	</div> 
+	<div class="col-md-offset-10 col-md-1 back">
+		<p>Back</p>
+		<div class="line"></div>
+		<div class="line"></div>
+	</div>
+
+	<div class="loader"></div>
+
+
+
+
+
+   
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+    	var colors=['#2196F3','#FF9800','#009688','#8BC34A','#F44336'];
+    	var height=$(window).height();
+    	var width=$(window).width();
+    	var panelNo=0;
+    	var lastScrollTop = 0;
+    	var direction=true;
+    	var growWidth, phnLft;
+    	var phone=false;
+    	$(window).load(function()
+    	{	
+    		$(".loader").fadeOut("slow");
+
+    		var scroll;
+    		$(window).scroll(function (event) {
+			    scroll = $(window).scrollTop();
+			    
+			    //direction
+			   
+				   if (scroll > lastScrollTop){
+				       direction=true;
+				   } else {
+				      direction=false;
+				   }
+				   lastScrollTop = scroll;
+
+
+			    if($(".active"))
+			    {		$(".cat>p").css({"color":"#9E9E9E"});
+						$(".cat>.dash").css({"background":"#9E9E9E"});
+			    		$(".cat.on>p").css({"color":$(".active>.intro>.title").css("color")});
+						$(".cat.on>.dash").css({"background":$(".active>.intro>.title").css("color")});
+						
+			    	
+			    		var fromTop=$(".active>.panels").offset().top;
+			    		var blur=Math.round(((fromTop-(scroll+0.2*height))/fromTop)*20);
+			    		$(".active>.panels>div>img").css({"filter":"blur("+blur+"px)"});		
+			    	if(scroll+0.3*height>$(".active>.panels").offset().top){
+
+			    		$(".active>.intro>.title.side").css({"transform":"scale(0.5) translate(-"+phnLft+"%,350%) rotate(-90deg)"}); 
+			    		$(".active>.intro>.title:nth-child(1)").css({"opacity":"0"}); 
+			    		
+			    		$(".active>.panels>div>img").css({"filter":"blur(0px)"});
+
+			    	}else{
+			    		$(".active>.intro>.title:nth-child(2)").css({"transform":"scale(0.5) translate(-"+phnLft+"%,-300%) rotate(-90deg)"}); 
+			    		$(".active>.intro>.title:nth-child(1)").css({"opacity":"1"}); 
+			    		
+			    	}
+			    }
+
+			    for(i=1;i<=$(".active>.panels").children().length;i++)
+			    {	
+				    if(scroll+0.5*height>$(".active>.panels>div:nth-child("+i+")").offset().top && scroll+0.5*height<($(".active>.panels>div:nth-child("+i+")").offset().top + $(".active>.panels>div:nth-child("+i+")").outerHeight()))
+				    {
+				    		
+				    		  	panelNo=i;
+				    		
+				    	
+				    	$(".active>.legend>div>.cat:nth-child("+panelNo+")").addClass("on");
+				    	
+				    	rem(i,$(".active>.panels").children().length,$(".active>.legend>div"));
+				    }
+				    else if(scroll+0.5*height<$(".active>.panels>div:nth-child(1)").offset().top)
+				    {
+				    	$(".active>.legend>div>.cat:nth-child(1)").removeClass("on");
+				    }
+				    
+
+				}
+
+				
+			});
+    		
+    		//responsive
+
+
+    		
+			    $(window).on("resize", function (e) {
+			        checkScreenSize();
+			    });
+
+			    checkScreenSize();
+
+			    function checkScreenSize(){
+			        var newWindowWidth = $(window).width();
+			        if (newWindowWidth < 992) {
+			            growWidth=0.3333;
+			            phone=true;
+			            phnLft=4;
+			        }
+			        else
+			        {
+			            growWidth=0.166667;
+			            phone=false; 
+			            phnLft=10;  
+			        }
+			    }
+			
+		if(!phone)
+		{
+//for large screens
+    		//hover functions
+    		$(".img-thumbnail").hover(function(){
+    			var temp=$(this).siblings("div").css("background-color");
+    			var value="linear-gradient( 180deg,"+temp+",white)";
+    			console.log(value);
+    			$(this).siblings("div").css({"height":growWidth*width+"px"});
+    			$(".back>.line").css({"transform":"scaleX(0.0) translate(0,0)"});
+    			$(this).siblings("h4").css({"color":"white","transform":"translateY(-200%)"});
+    			$(".main>.row.intro").css({"background":temp,"background-repeat":" no-repeat","background-position":"right bottom", "backgroun-size":"cover"});
+    			switch($(this).parent().index())
+    			{	
+    				case 0:	//$(this).parent().css({"background":"#2196F3"});
+    						$(this).siblings("h4:nth-child(2)").css({"color":"#2196F3","font-size":"2vh"}); 
+    						break;
+    				case 1:	//$(this).parent().css({"background":"#FF9800"}); 
+    						$(this).siblings("h4:nth-child(2)").css({"color":"#FF9800","font-size":"2vh"}); 
+    						break;
+    				case 2:	//$(this).parent().css({"background":"#009688"}); 
+    						$(this).siblings("h4:nth-child(2)").css({"color":"#009688","font-size":"2vh"}); 
+    						break;
+    				case 3:	//$(this).parent().css({"background":"#8BC34A"}); 
+    						$(this).siblings("h4:nth-child(2)").css({"color":"#8BC34A","font-size":"2vh"}); 
+    						break;
+    				case 4:	//$(this).parent().css({"background":"#F44336"}); 
+    						$(this).siblings("h4:nth-child(2)").css({"color":"#F44336","font-size":"2vh"}); 
+    						break;
+    				case 5: //$(this).parent().css({"background":"#2196F3"}); 
+    						$(this).siblings("h4:nth-child(2)").css({"color":"#9b27b0","font-size":"2vh"}); 
+    						break;
+    				case 0:	//$(this).parent().css({"background":"#2196F3"});
+    						$(this).siblings("h4:nth-child(2)").css({"color":"#2196F3","font-size":"2vh"}); 
+    						break;
+    			}
+
+    		},function(){
+    			$(this).siblings("div").css({"height":"0vh"});
+    			$(this).parent().css({"background":"white"});
+    			$(this).siblings("h4").css({"color":"black","transform":"translateY(0%)","font-size":"1.8vh"});
+    			$(".intro").css({"background":"white"});
+    			
+    			
+    		});
+
+
+    		$(".back").hover(function(){
+    			$(".line:nth-child(2)").css({"transform":"scaleX(1.5) rotate(0) translate(0,0)"});
+    			$(".line:nth-child(3)").css({"transform":"scaleX(1.5) rotate(0) translate(0,0)"});
+    			$(".back>p").css({"opacity":"1","transform":"translateX(-10%)"});
+    		},function(){
+    			if($(".active"))
+    			{	
+    				$(".line:nth-child(2)").css({"transform":"scaleX(0.5) rotate(-25deg) translate(0,0)"});
+    				$(".line:nth-child(3)").css({"transform":"scaleX(0.5) rotate(25deg) translate(0, -100%)"});
+    				$(".back>p").css({"opacity":"0","transform":"translateX(50%)"});
+    			}
+    		});
+
+
+
+    		$(".cat").hover(function(){
+    			$(this).children("p").css({"margin":"0vh 0.8vh 0 0","color":colors[$(".active").index()-2],"font-weight":"600"});
+    			$(this).children(".dash").css({"background":colors[$(".active").index()-2]});
+    		},function(){
+    			if(!$(this).hasClass("on"))
+    			{
+	    			$(this).children("p").css({"margin":"0 0.8vh 0 0","color":"#9E9E9E","font-weight":"500"});
+	    			$(this).children(".dash").css({"background":"#9E9E9E","transform":"translateY(500%) scaleX(1)"});
+    			}
+    		});
+
+
+
+
+
+    	}
+    	else{
+//code for phone
+			
+
+
+    	}	
+
+
+    		//click functions
+    		$(".img-thumbnail").click(function(){
+    			var child=parseInt($(this).parent().index())+2;
+    			var color=$(this).siblings("div").css("background-color");
+    			
+
+    			//move
+    			change(child, this);
+    			move(4,$(".main>.intro>.title"),1);
+    			move(6,$(".main"),1);
+    			$(".sheet").css({"background":color});
+    			move(3,$(".sheet"),1);
+    			
+    			$("body").children().eq(child+1).addClass("active");
+    			$(".active>.intro>.title").css({"color":color});
+    			$(".back").css({"visibility":"visible"});
+    			$(".back>p").css({"color":color});
+    			setTimeout(function()
+    			{
+    				$(".back>.line:nth-child(2)").css({"background":color,"transform":"scaleX(0.5) rotate(25deg) translate(0,0)"});
+    				$(".back>.line:nth-child(3)").css({"background":color,"transform":"scaleX(0.5) rotate(-25deg) translate(0,-100%)"});
+    			},1500);
+    			//$(".main").css({"opacity":"1"});
+
+
+
+    			//legends
+
+    			
+    		});
+
+    		$(".cat").click(function(){
+    			var idx=$(this).index();
+    			console.log("index: "+idx);
+    			$("html,body").animate({scrollTop:$(".active>.panels").children("div").eq(idx).offset().top},500);
+
+
+    		});
+
+
+    		$(".back").click(function(){
+
+    			$("html, body").animate({ scrollTop: 0 }, "slow");
+    			move(0,$(".sheet"),0);
+    			move(6,$(".main"),0);
+    			move(5,$(".main>.intro>.title"),0);
+    			
+    			for(i=1;i<=6;i++)
+    			{
+    				move(i,$(".branches>div:nth-child("+i+")"),0);
+    			}
+    			setTimeout(function(){$(".branch.active").removeClass("active");},1000);
+    			$(".back>.line").css({"transform":"scaleX(0.0) rotate(0deg) translate(0,0)"});
+    			setTimeout(function(){
+    				
+    				
+    				$(".back").css({"visibility":"hidden"});
+    				$(".back>.line").css({"transform":"scaleX(0.0) rotate(0deg) translate(0,0)"});
+    			},800);
+    			
+    			
+    		});
+
+
+
+    		function change(index, entity){
+    			var index=index;
+    			var par=$(entity).parent();
+    			move(0,par,1);
+    			
+    			for(i=index-1, j=index+1, k=0; i>=1||j<=5; i--,j++,k++)
+    			{	
+    				if(i>=1&& j>5)
+    					{	   	
+    						move(k,par.parent().children().eq(i-1),1);				
+    					}
+    				if(i<1&& j<=5)
+    					{	
+    						move(k,par.parent().children().eq(j-1),1);
+    					
+    					}
+    				if(i>=1&& j<=5)
+    					{
+    						move(k,par.parent().children().eq(i-1),1);
+    						move(k,par.parent().children().eq(j-1),1);
+    					}
+    					
+    			}
+
+    		}
+
+    		function move(k,ent,a)
+    		{
+    			if(a==1)
+    			{
+    				setTimeout(function(){$(ent).addClass("gone");},k*100);
+    			}
+    			else{
+    				setTimeout(function(){$(ent).removeClass("gone");},k*100);
+    			}
+    		}
+
+    		function rem(idx,len,obj)
+    		{	
+    			if(direction)
+    			{
+	    			for(j=idx-2;j>=0;j--)
+	    			{	
+	    					
+	    					$(obj).children().eq(j).removeClass("on");
+
+	    				
+	    			}
+	    		}
+	    		else{
+	    			for(j=idx;j<=len;j++)
+	    			{	
+	    					
+	    					$(obj).children().eq(j).removeClass("on");
+	    				
+	    			}
+
+	    		}
+    		}
+
+
+
+    	})
+    		
+
+    	
+    </script>
+  </body>
+</html>
